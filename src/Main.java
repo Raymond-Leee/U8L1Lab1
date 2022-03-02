@@ -2,54 +2,51 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        String[][] seatingChart = {{"Abby", "Don", "George", "Kim"},
-                                   {"Brian", "Elenor", "Harry", "Lenny"},
-                                   {"Cathy", "Fred", "Jill", "Matt"}};
+        int[][] arr1 = {{1, 2, 3}, {1, 5, 9}, {4, 6, 0}};
+        int[][] arr2 = {{1, 2, 3}, {0, 2, 4}, {1, 0, 3}};
+        int[][] arr3 = {{0, 0, 0}, {1, 1, 1}, {2, 2, 2}};
 
-        seatingChart[1][2] = "Paul";
-
-        String temp = seatingChart[0][0];
-        seatingChart[0][0] = seatingChart[2][3];
-        seatingChart[2][3] = temp;
-
-        String[] tempList = seatingChart[0];
-        seatingChart[0] = seatingChart[1];
-        seatingChart[1] = tempList;
-
-        for (String[] arr : seatingChart)
+        System.out.println("Input: ");
+        for (int[] row : arr1)
         {
-            System.out.println(Arrays.toString(arr));
+            System.out.println(Arrays.toString(row));
         }
-
-        System.out.println(seatingChart[0][2] + seatingChart[2][0]);
-
-        int[][] arr1 = new int[2][3];
-        int[][] arr2 = new int[3][2];
-
-        arr1[0][0] = 1;
-        arr1[0][1] = 2;
-        arr1[0][2] = 3;
-        arr1[1][0] = 4;
-        arr1[1][1] = 5;
-        arr1[1][2] = 6;
-
-        for (int[] arr : arr1)
+        System.out.println("Expected result: 1");
+        System.out.println("Actual result: " + hasDuplicates(arr1));
+        System.out.println("-------------------------------------");
+        System.out.println("Input: ");
+        for (int[] row : arr2)
         {
-            System.out.println(Arrays.toString(arr));
+            System.out.println(Arrays.toString(row));
         }
-
-        arr2[0][0] = 1;
-        arr2[0][1] = 2;
-        arr2[1][0] = 3;
-        arr2[1][1] = 4;
-        arr2[2][0] = 5;
-        arr2[2][1] = 6;
-
-        for (int[] arr : arr2)
+        System.out.println("Expected result: 3");
+        System.out.println("Actual result: " + hasDuplicates(arr2));
+        System.out.println("-------------------------------------");
+        System.out.println("Input: ");
+        for (int[] row : arr3)
         {
-            System.out.println(Arrays.toString(arr));
+            System.out.println(Arrays.toString(row));
         }
-
-        System.out.println(arr1[0][2] + arr2[2][0]);
+        System.out.println("Expected result: 0");
+        System.out.println("Actual result: " + hasDuplicates(arr3));
     }
+        public static int hasDuplicates(int[][] arr)
+        {
+            int num = 0;
+            for (int c = 0; c < arr[0].length; c++)
+            {
+                for (int r = 0; r < arr.length; r++)
+                {
+                    int dupe = arr[r][c];
+                    for (int i = r + 1; i < arr.length; i++)
+                    {
+                        if (dupe == arr[i][c])
+                        {
+                            num++;
+                        }
+                    }
+                }
+            }
+            return num;
+        }
 }
